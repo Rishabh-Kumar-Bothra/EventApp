@@ -9,6 +9,9 @@ app.set('view engine','ejs');
 //app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
+var home = require('./routes/home');
+var dashboard = require('./routes/dashboard');
+
 // app.use(session({
 //     secret: "testing",
 //     resave: true,
@@ -26,10 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //     client.close();
 // })
 
-app.get('/',(req,res)=>{
-    //res.send("started again");
-    res.render('home');
-})
+
 
 app.get('/signup',(req,res)=>{
     res.render('signup');
@@ -48,6 +48,9 @@ app.post('/login',(req,res)=>{
     console.log(req.body);
     res.redirect('/');
 })
+
+app.use('/',home);
+app.use('/dashboard',dashboard);
 
 app.listen(3000,()=>{
     console.log("server started");
