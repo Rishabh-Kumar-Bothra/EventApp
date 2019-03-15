@@ -23,6 +23,8 @@ mongoose.connect('mongodb://geekychaser:p1234567@ds131711.mlab.com:31711/eventsa
 
 var home = require('./routes/home');
 var dashboard = require('./routes/dashboard');
+var users = require('./routes/users');
+var event = require('./routes/events');
 
 
 app.use(validator());
@@ -53,39 +55,12 @@ app.use(validator({
         };
     }
 }));
-// const uri = "mongodb+srv://9811809871@cluster0-apyn6.mongodb.net/test?retryWrites=true"
 
-// mongoClient.connect(uri,{ useNewUrlParser: true },(err,client)=>{
-//     if(err){
-//         console.log(err);
-//     }
-//     console.log("connected..");
-//     const collection = client.db("test").collection("devices");
-//     client.close();
-// })
-
-
-
-app.get('/signup',(req,res)=>{
-    res.render('signup');
-})
-
-app.post('/signup',(req,res)=>{
-    console.log(req.body);
-    res.redirect('/');
-})
-
-app.get('/login',(req,res)=>{
-    res.render('login');
-})
-
-app.post('/login',(req,res)=>{
-    console.log(req.body);
-    res.redirect('/');
-})
 
 app.use('/',home);
 app.use('/dashboard',dashboard);
+app.use('/users', users);
+app.use('/event', event);
 
 app.listen(3000,()=>{
     console.log("server started");
