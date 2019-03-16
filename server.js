@@ -18,7 +18,7 @@ var event = require('./routes/events');
 
 
 const app = express();
-var port = 3001 || process.env.PORT;
+var port = process.env.PORT || 3001 ;
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://geekychaser:p1234567@ds131711.mlab.com:31711/eventsapp')
