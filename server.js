@@ -9,7 +9,7 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
-const _ = require('lowdash');
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -18,7 +18,7 @@ var event = require('./routes/events');
 
 
 const app = express();
-var port = 3001 || process.env.port;
+var port = 3001 || process.env.PORT;
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://geekychaser:p1234567@ds131711.mlab.com:31711/eventsapp')
