@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
-router.get('/events', function(req, res){
-    res.render('events');
-});
+var Event = require('../models/event');
 
 router.get('/', (req, res) => {
     Event.find({}, (err, result) => {
@@ -17,7 +14,7 @@ router.get('/', (req, res) => {
             datachunks.push(result.slice(i,i+chunksize));
         };
         console.log(datachunks);
-        res.render('events', { result: datachunks});
+        res.render('event', { result: datachunks});
     })
     // res.render('events', { data: data})
 });

@@ -1,12 +1,12 @@
 {
-  "name": "event",
+  "name": "fq",
   "version": "1.0.0",
-  "description": "",
+  "description": "A event mangement website",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "geekychaser",
+  "author": "mittalprince",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

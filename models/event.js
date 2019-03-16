@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var EventSchema = mongoose.Schema({
-    title: {
+    eventname: {
         type: String,
         default: ''
     },
@@ -14,7 +14,7 @@ var EventSchema = mongoose.Schema({
         type: String,
         default: ''
     },
-    description: {
+    details: {
         type: String,
         default: ''
     },

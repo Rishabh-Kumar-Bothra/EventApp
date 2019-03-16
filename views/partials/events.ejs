@@ -1,5 +1,3 @@
-<%- include partials/navigation.ejs %>
-
 <div class="container"> 
     <% result.forEach( (val) => { %>
     <div class="card-group row">
@@ -12,7 +10,6 @@
             <p class="card-text"><%= val2.details %></p>
             <p class="card-text">Location: <%= val2.location %></p>
             <p class="card-text">On: <%= val2.date %></p>
-            <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
           </div>
         </div>
         <% }) %>

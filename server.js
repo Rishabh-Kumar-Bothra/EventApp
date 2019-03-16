@@ -10,26 +10,33 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const _ = require('lowdash');
-var app = express();
 
-app.set('view engine','ejs');
-//app.set('views', path.join(__dirname, 'views'));
+var routes = require('./routes/index');
+var users = require('./routes/users');
+var dashboard = require('./routes/dashboard');
+var event = require('./routes/events');
+
+
+const app = express();
+var port = 3001;
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://geekychaser:p1234567@ds131711.mlab.com:31711/eventsapp')
+
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+
+app.use(express.static(path.join(__dirname,'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cookieParser());
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://geekychaser:p1234567@ds131711.mlab.com:31711/eventsapp');
-
-var home = require('./routes/home');
-var dashboard = require('./routes/dashboard');
-var users = require('./routes/users');
-var event = require('./routes/events');
-
 
 app.use(validator());
 app.use(session({
-	secret: 'nottobetold',
+	secret: 'thisisasecretkey',
 	resave: true,
 	saveInitialized:true,
     store:new MongoStore({mongooseConnection:mongoose.connection})
@@ -56,13 +63,24 @@ app.use(validator({
     }
 }));
 
+app.use(flash());
 
-app.use('/',home);
-app.use('/dashboard',dashboard);
+app.use(function(req,res,next){
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
+    next();
+});
+
+
+
+app.use('/', routes);
 app.use('/users', users);
+app.use('/dashboard', dashboard);
 app.use('/event', event);
 
-app.listen(3000,()=>{
-    console.log("server started");
-})
 
+app.listen(port, () => {
+	console.log(`Server is listening on ${port}`);
+})

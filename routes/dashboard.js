@@ -20,17 +20,17 @@ router.get('/eventregister', ensureAuthenticated, function(req, res){
 })
 
 router.post('/eventregister', ensureAuthenticated, function(req,res){
-    var title =  req.body.title;
+    var eventname =  req.body.eventname;
     var location = req.body.location;
     var organization = req.body.organization;
     var date = req.body.date;
-    var description = req.body.description;
+    var details = req.body.details;
     var contact = req.body.contact;
 
-    req.checkBody('title', 'Event name is required').notEmpty();
+    req.checkBody('eventname', 'Event name is required').notEmpty();
     req.checkBody('location', 'Location is required').notEmpty();
     req.checkBody('organization', 'Organization name is required').notEmpty();
-    req.checkBody('description', 'Details of event required').isLength({min: 10})
+    req.checkBody('details', 'Details of event required').isLength({min: 10})
     req.checkBody('contact', 'Contact no is invalid').isLength({min: 10}).isLength({max:10});
     req.checkBody('contact', 'Contact no should be numeric').isNumeric();
 
@@ -48,11 +48,11 @@ router.post('/eventregister', ensureAuthenticated, function(req,res){
             }
             else{
                 var newEvent = new Event({
-                    title: title,
+                    eventname: eventname,
                     location: location,
                     organization: organization,
                     date: date,
-                    description: description,
+                    details: details,
                     contact: contact
                 });
         
